@@ -6,10 +6,13 @@ import { defineFunctions } from './utils/define-functions';
 import { CommonOptions, withCommonDefaults } from './common-options';
 import { setUpgradeable } from './set-upgradeable';
 import { setInfo } from './set-info';
+import { setRoyalty } from './set-royalty';
 
 export interface ERC1155Options extends CommonOptions {
   name: string;
   uri: string;
+  royaltyRecipient?: string;
+  royaltyFraction?: string;
   burnable?: boolean;
   pausable?: boolean;
   mintable?: boolean;
@@ -23,6 +26,18 @@ export function buildERC1155(opts: ERC1155Options): Contract {
 
   addBase(c, opts.uri);
   addSetUri(c, access);
+
+  if (opts.royaltyRecipient && opts.royaltyFraction) {
+    setRoyalty(
+      c,
+      {
+        name: 'ERC1155Royalty',
+        path: '@openzeppelin/contracts/token/ERC721/extensions/ERC1155Royalty.sol',
+      },
+      opts.royaltyRecipient,
+      opts.royaltyFraction
+    );
+  }
 
   if (opts.pausable) {
     addPausable(c, access, [functions._beforeTokenTransfer]);

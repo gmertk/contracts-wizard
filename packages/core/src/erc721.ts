@@ -6,11 +6,14 @@ import { defineFunctions } from './utils/define-functions';
 import { CommonOptions, withCommonDefaults } from './common-options';
 import { setUpgradeable } from './set-upgradeable';
 import { setInfo } from './set-info';
+import { setRoyalty } from './set-royalty';
 
 export interface ERC721Options extends CommonOptions {
   name: string;
   symbol: string;
   baseUri?: string;
+  royaltyRecipient?: string;
+  royaltyFraction?: string;
   enumerable?: boolean;
   uriStorage?: boolean;
   burnable?: boolean;
@@ -28,6 +31,18 @@ export function buildERC721(opts: ERC721Options): Contract {
 
   if (opts.baseUri) {
     addBaseURI(c, opts.baseUri);
+  }
+
+  if (opts.royaltyRecipient && opts.royaltyFraction) {
+    setRoyalty(
+      c,
+      {
+        name: "ERC721Royalty",
+        path: "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol",
+      },
+      opts.royaltyRecipient,
+      opts.royaltyFraction
+    );
   }
 
   if (opts.enumerable) {

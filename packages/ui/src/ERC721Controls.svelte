@@ -2,7 +2,7 @@
   import HelpTooltip from './HelpTooltip.svelte';
 
   import type { KindedOptions } from '@openzeppelin/wizard';
-  import { infoDefaults } from '@openzeppelin/wizard';
+  import { royaltyFractionPattern, infoDefaults } from '@openzeppelin/wizard';
   
   import AccessControlSection from './AccessControlSection.svelte';
   import UpgradeabilitySection from './UpgradeabilitySection.svelte';
@@ -14,6 +14,8 @@
     name: 'MyToken',
     symbol: 'MTK',
     baseUri: '',
+    royaltyRecipient: '',
+    royaltyFraction: '',
     enumerable: false,
     uriStorage: false,
     burnable: false,
@@ -61,6 +63,20 @@
       <HelpTooltip>Will be concatenated with token IDs to generate the token URIs.</HelpTooltip>
     </span>
     <input bind:value={opts.baseUri} placeholder="https://...">
+  </label>
+  <label class="labeled-input">
+    <span class="flex justify-between pr-2">
+      Royalty Recipient
+      <HelpTooltip>Sets the royalty recipient.</HelpTooltip>
+    </span>
+    <input bind:value={opts.royaltyRecipient} placeholder="0x...">
+  </label>
+  <label class="labeled-input">
+    <span class="flex justify-between pr-2">
+      Royalty Fraction
+      <HelpTooltip>Sets the royalty fraction.</HelpTooltip>
+    </span>
+    <input bind:value={opts.royaltyFraction} placeholder="1000" pattern={royaltyFractionPattern.source}>
   </label>
 </section>
 

@@ -20,3 +20,5 @@ export { OptionsError } from './error';
 
 export type { Kind } from './kind';
 export { sanitizeKind } from './kind';
+
+export { royaltyFractionPattern } from './set-royalty'

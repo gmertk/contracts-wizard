@@ -2,7 +2,7 @@
   import HelpTooltip from './HelpTooltip.svelte';
 
   import type { KindedOptions } from '@openzeppelin/wizard';
-  import { infoDefaults } from '@openzeppelin/wizard';
+  import { royaltyFractionPattern, infoDefaults } from '@openzeppelin/wizard';
 
   import AccessControlSection from './AccessControlSection.svelte';
   import UpgradeabilitySection from './UpgradeabilitySection.svelte';
@@ -12,6 +12,8 @@
     kind: 'ERC1155',
     name: 'MyToken',
     uri: '',
+    royaltyRecipient: '',
+    royaltyFraction: '',
     burnable: false,
     pausable: false,
     mintable: false,
@@ -35,6 +37,20 @@
       <HelpTooltip>Location of the metadata. Clients will replace any instance of &lbrace;id&rbrace; in this string with the tokenId.</HelpTooltip>
     </span>
     <input bind:value={opts.uri} placeholder="https://...">
+  </label>
+  <label class="labeled-input">
+    <span class="flex justify-between pr-2">
+      Royalty Recipient
+      <HelpTooltip>Sets the royalty recipient.</HelpTooltip>
+    </span>
+    <input bind:value={opts.royaltyRecipient} placeholder="0x...">
+  </label>
+  <label class="labeled-input">
+    <span class="flex justify-between pr-2">
+      Royalty Fraction
+      <HelpTooltip>Sets the royalty fraction.</HelpTooltip>
+    </span>
+    <input bind:value={opts.royaltyFraction} placeholder="1000" pattern={royaltyFractionPattern.source}>
   </label>
 </section>
 

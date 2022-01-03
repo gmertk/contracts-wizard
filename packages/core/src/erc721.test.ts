@@ -20,6 +20,11 @@ testERC721('base uri', {
   baseUri: 'https://gateway.pinata.cloud/ipfs/QmcP9hxrnC1T5ATPmq2saFeAM1ypFX9BnAswCdHB9JCjLA/',
 });
 
+testERC721('royalty', {
+  royaltyRecipient: '0',
+  royaltyFraction: '2000',
+});
+
 testERC721('enumerable', {
   enumerable: true,
 });

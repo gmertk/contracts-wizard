@@ -20,6 +20,11 @@ testERC1155('basic + roles', {
   access: 'roles',
 });
 
+testERC1155('royalty', {
+  royaltyRecipient: '0',
+  royaltyFraction: '2000',
+});
+
 testERC1155('burnable', {
   burnable: true,
 });

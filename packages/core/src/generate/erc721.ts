@@ -10,6 +10,8 @@ const blueprint = {
   name: ['MyToken'],
   symbol: ['MTK'],
   baseUri: ['https://example.com/'],
+  royaltyRecipient: ['0'],
+  royaltyFraction: ['0'],
   enumerable: booleans,
   uriStorage: booleans,
   burnable: booleans,
